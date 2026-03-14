@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>EchoBox — The Ultimate BoxPvP Experience</title>
+  <meta name="description" content="EchoBox BoxPvP Minecraft server. Custom bosses, 21 worlds, guilds, daily events. Join on echoboxxx.minehut.gg"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- SVG SPRITE -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="i-skull" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="11" r="7"/><line x1="9.5" y1="17" x2="9.5" y2="22"/><line x1="14.5" y1="17" x2="14.5" y2="22"/><circle cx="9.5" cy="10" r="1" fill="currentColor"/><circle cx="14.5" cy="10" r="1" fill="currentColor"/><line x1="10.5" y1="17" x2="13.5" y2="17"/>
+  </symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" y1="12" x2="22" y2="12"/>
+  </symbol>
+  <symbol id="i-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+  </symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+  </symbol>
+  <symbol id="i-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+  </symbol>
+  <symbol id="i-box" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>
+  </symbol>
+  <symbol id="i-crown" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M2 20s1-5 3-8l3 5 4-11 4 11 3-5c2 3 3 8 3 8H2z"/><line x1="2" y1="20" x2="22" y2="20"/>
+  </symbol>
+  <symbol id="i-gem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <polygon points="6 3 18 3 22 9 12 22 2 9"/><line x1="12" y1="22" x2="12" y2="9"/><path d="M2 9h20"/><line x1="6" y1="3" x2="2" y2="9"/><line x1="18" y1="3" x2="22" y2="9"/>
+  </symbol>
+  <symbol id="i-palette" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
+    <circle cx="8" cy="7.5" r="1" fill="currentColor"/><circle cx="12" cy="5.5" r="1" fill="currentColor"/><circle cx="16" cy="7.5" r="1" fill="currentColor"/><circle cx="17.5" cy="12" r="1" fill="currentColor"/>
+  </symbol>
+  <symbol id="i-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="7.5" cy="15.5" r="3.5"/><path d="M10.5 12.5L19 4"/><line x1="17" y1="4" x2="21" y2="8"/>
+  </symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/>
+    <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>
+  </symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+  </symbol>
+  <symbol id="i-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+    <path d="M7 4H4a2 2 0 0 0-2 2v1c0 3.3 2.7 6 6 6"/><path d="M17 4h3a2 2 0 0 1 2 2v1c0 3.3-2.7 6-6 6"/>
+    <path d="M12 17a5 5 0 0 1-5-5V4h10v8a5 5 0 0 1-5 5z"/>
+  </symbol>
+  <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+  </symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+  </symbol>
+  <symbol id="i-discord" viewBox="0 0 127.14 96.36">
+    <path fill="currentColor" d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
+  </symbol>
+</svg>
+
+<div class="noise-overlay"></div>
+<div id="scroll-progress"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo"><img src="images/logo.webp" alt="EchoBox"/></a>
+    <div class="nav-links">
+      <a href="#features" class="nav-link">Features</a>
+      <a href="#worlds" class="nav-link">Worlds</a>
+      <a href="#store" class="nav-link">Store</a>
+      <a href="#discord" class="nav-link">Community</a>
+    </div>
+    <div class="nav-actions">
+      <div class="server-status"><span class="status-dot"></span><span id="playerCount">—</span> online</div>
+      <a href="#join" class="btn btn-primary">Play Now</a>
+    </div>
+    <button class="nav-burger" id="navBurger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="#features" class="nav-mobile-link">Features</a>
+    <a href="#worlds" class="nav-mobile-link">Worlds</a>
+    <a href="#store" class="nav-mobile-link">Store</a>
+    <a href="#discord" class="nav-mobile-link">Community</a>
+    <a href="#join" class="btn btn-primary" style="margin-top:8px">Play Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="hero">
+  <div class="hero-bg-img"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-particles" id="heroParticles"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow"><span class="eyebrow-dot"></span>BoxPvP on Minehut</div>
+    <img src="images/logo.webp" alt="EchoBox" class="hero-logo"/>
+    <p class="hero-tagline">21 worlds. Custom bosses. Guild wars.<br>The best BoxPvP server on Minehut.</p>
+    <div class="hero-ip-wrap">
+      <div class="ip-editions">
+        <div class="ip-edition">
+          <span class="ip-edition-label">Java Edition</span>
+          <button class="ip-btn" id="ipCopy" data-ip="echoboxxx.minehut.gg">
+            <span class="ip-icon-mc">⛏</span>echoboxxx.minehut.gg<span class="ip-copy-tag">Copy</span>
+          </button>
+        </div>
+        <div class="ip-edition">
+          <span class="ip-edition-label">Bedrock Edition</span>
+          <button class="ip-btn" id="ipCopyBedrock" data-ip="echoboxxx.bedrock.minehut.gg">
+            <span class="ip-icon-mc">⛏</span>echoboxxx.bedrock.minehut.gg<span class="ip-copy-tag">Copy</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="hero-ctas">
+      <a href="#join" class="btn btn-primary btn-lg">How to Join<svg class="btn-svg"><use href="#i-arrow"/></svg></a>
+      <a href="https://discord.gg/88jvF92RJ7" target="_blank" class="btn btn-outline-white btn-lg">
+        <svg class="btn-svg" style="fill:#fff;stroke:none"><use href="#i-discord"/></svg>Join Discord
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="h-stat"><span class="h-stat-num">21</span><span class="h-stat-label">Worlds</span></div>
+      <div class="h-stat"><span class="h-stat-num" id="discordHeroCount">—</span><span class="h-stat-label">Discord Members</span></div>
+      <div class="h-stat"><span class="h-stat-num">100+</span><span class="h-stat-label">Custom Items</span></div>
+      <div class="h-stat"><span class="h-stat-num" id="playerHeroCount">—</span><span class="h-stat-label">Players Online</span></div>
+    </div>
+  </div>
+  <div class="hero-scroll-hint"><div class="scroll-line"></div>scroll</div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span class="mq-item">BoxPvP</span><span class="mq-dot"></span>
+    <span class="mq-item">21 Worlds</span><span class="mq-dot"></span>
+    <span class="mq-item">Custom Bosses</span><span class="mq-dot"></span>
+    <span class="mq-item">Guilds System</span><span class="mq-dot"></span>
+    <span class="mq-item">Daily Events</span><span class="mq-dot"></span>
+    <span class="mq-item">Fast Progression</span><span class="mq-dot"></span>
+    <span class="mq-item">Custom Items</span><span class="mq-dot"></span>
+    <span class="mq-item">Ranks</span><span class="mq-dot"></span>
+    <span class="mq-item">BoxPvP</span><span class="mq-dot"></span>
+    <span class="mq-item">21 Worlds</span><span class="mq-dot"></span>
+    <span class="mq-item">Custom Bosses</span><span class="mq-dot"></span>
+    <span class="mq-item">Guilds System</span><span class="mq-dot"></span>
+    <span class="mq-item">Daily Events</span><span class="mq-dot"></span>
+    <span class="mq-item">Fast Progression</span><span class="mq-dot"></span>
+    <span class="mq-item">Custom Items</span><span class="mq-dot"></span>
+    <span class="mq-item">Ranks</span><span class="mq-dot"></span>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section id="features" class="section section-light">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label reveal">What We Offer</div>
+      <h2 class="section-title reveal">Built For <em>Champions</em></h2>
+      <p class="section-desc reveal">No filler. Just content that's actually fun.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card reveal">
+        <div class="feat-icon-wrap"><svg class="feat-svg"><use href="#i-skull"/></svg></div>
+        <div class="feat-title">Custom Bosses</div>
+        <p class="feat-desc">Huge server-wide bosses with crazy loot. Fight hard, get rewarded.</p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon-wrap"><svg class="feat-svg"><use href="#i-globe"/></svg></div>
+        <div class="feat-title">21 Worlds</div>
+        <p class="feat-desc">Arctic, Space, Nightmare, Jungle — 21 worlds to explore and loot.</p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon-wrap"><svg class="feat-svg"><use href="#i-zap"/></svg></div>
+        <div class="feat-title">Fast Progression</div>
+        <p class="feat-desc">Get strong fast. Every session feels rewarding, no grinding required.</p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon-wrap"><svg class="feat-svg"><use href="#i-shield"/></svg></div>
+        <div class="feat-title">Guild Wars</div>
+        <p class="feat-desc">Team up and take on enemies together. Claim territory, win fights.</p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon-wrap"><svg class="feat-svg"><use href="#i-star"/></svg></div>
+        <div class="feat-title">Daily Events</div>
+        <p class="feat-desc">New events every day. Log in, compete, win exclusive rewards.</p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon-wrap"><svg class="feat-svg"><use href="#i-box"/></svg></div>
+        <div class="feat-title">Custom Items</div>
+        <p class="feat-desc">100+ custom items with unique powers. Build your loadout and dominate.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER: white → dark (angled) -->
+<div class="sect-divider" style="background:#ffffff">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" style="display:block;width:100%;height:80px">
+    <polygon fill="#0d0d0f" points="0,80 1440,20 1440,80"/>
+  </svg>
+</div>
+
+<!-- WORLDS -->
+<section id="worlds" class="section worlds-section">
+  <div class="container">
+    <div class="section-header-split">
+      <div>
+        <div class="section-label section-label-light reveal">Explore</div>
+        <h2 class="section-title reveal">21 <em>Worlds</em></h2>
+        <p class="section-desc section-desc-white reveal">Use <code class="ip-code">/warp</code> to fast travel between worlds instantly.</p>
+      </div>
+      <a href="#join" class="btn btn-primary btn-lg reveal" style="flex-shrink:0;align-self:flex-end">Play Now<svg class="btn-svg"><use href="#i-arrow"/></svg></a>
+    </div>
+    <div class="worlds-grid" id="worldsGrid"></div>
+  </div>
+</section>
+
+<!-- DIVIDER: dark → red (wave) -->
+<div class="sect-divider" style="background:#0d0d0f">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" style="display:block;width:100%;height:80px">
+    <path fill="#ff2947" d="M0,60 C240,20 480,80 720,50 C960,20 1200,70 1440,40 L1440,80 L0,80 Z"/>
+  </svg>
+</div>
+
+<!-- JOIN / IP CALLOUT -->
+<div id="join" class="ip-callout">
+  <div class="ip-callout-inner">
+    <h2>Ready to<br>Play?</h2>
+    <div class="join-editions">
+      <div class="join-edition">
+        <div class="join-edition-label">Java Edition</div>
+        <button class="ip-big-btn" id="ipCopy2" data-ip="echoboxxx.minehut.gg">
+          echoboxxx.minehut.gg<span class="ip-big-tag">Copy</span>
+        </button>
+      </div>
+      <div class="join-edition">
+        <div class="join-edition-label">Bedrock Edition</div>
+        <button class="ip-big-btn" id="ipCopy3" data-ip="echoboxxx.bedrock.minehut.gg">
+          echoboxxx.bedrock.minehut.gg<span class="ip-big-tag">Copy</span>
+        </button>
+      </div>
+    </div>
+    <div class="ip-callout-note">Hosted on Minehut · Java &amp; Bedrock supported</div>
+    <div class="player-pill"><span class="player-pill-dot"></span><span id="playerCount2">—</span> players online right now</div>
+  </div>
+</div>
+
+<!-- DIVIDER: red → off-white (pixel steps) -->
+<div class="sect-divider" style="background:#ff2947">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" style="display:block;width:100%;height:80px">
+    <path fill="#f5f5f5" d="M0,80 L0,53 L240,53 L240,40 L480,40 L480,27 L720,27 L720,14 L960,14 L960,0 L1440,0 L1440,80 Z"/>
+  </svg>
+</div>
+
+<!-- STORE -->
+<section id="store" class="section section-off">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label reveal">Webstore</div>
+      <h2 class="section-title reveal">Support &amp; <em>Upgrade</em></h2>
+      <p class="section-desc reveal">Buy once, keep forever. All purchases support the server.</p>
+    </div>
+    <div class="store-grid">
+      <div class="store-card reveal">
+        <div class="store-popular">Most Popular</div>
+        <div class="store-icon"><svg class="store-svg"><use href="#i-crown"/></svg></div>
+        <div class="store-title">Ranks</div>
+        <p class="store-desc">Get a rank with cool perks, prefixes and commands in-game.</p>
+        <a href="https://echoboxxx.tebex.io" target="_blank" class="btn btn-primary">View Ranks<svg class="btn-svg"><use href="#i-arrow"/></svg></a>
+      </div>
+      <div class="store-card reveal">
+        <div class="store-icon"><svg class="store-svg"><use href="#i-gem"/></svg></div>
+        <div class="store-title">Echoes</div>
+        <p class="store-desc">Spend Echoes on skins, cosmetics and more. The server's main currency.</p>
+        <a href="https://echoboxxx.tebex.io" target="_blank" class="btn btn-primary">Buy Echoes<svg class="btn-svg"><use href="#i-arrow"/></svg></a>
+      </div>
+      <div class="store-card reveal">
+        <div class="store-icon"><svg class="store-svg"><use href="#i-palette"/></svg></div>
+        <div class="store-title">Chat Colors</div>
+        <p class="store-desc">Make your chat messages stand out with a custom color.</p>
+        <a href="https://echoboxxx.tebex.io" target="_blank" class="btn btn-primary">Browse Colors<svg class="btn-svg"><use href="#i-arrow"/></svg></a>
+      </div>
+      <div class="store-card reveal">
+        <div class="store-icon"><svg class="store-svg"><use href="#i-key"/></svg></div>
+        <div class="store-title">Lootboxes</div>
+        <p class="store-desc">Open crates for rare items or give keys to every player online.</p>
+        <a href="https://echoboxxx.tebex.io" target="_blank" class="btn btn-primary">Open Store<svg class="btn-svg"><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+    <div class="store-full-cta reveal">
+      <a href="https://echoboxxx.tebex.io" target="_blank" class="btn btn-primary btn-xl">Visit Full Store<svg class="btn-svg"><use href="#i-arrow"/></svg></a>
+      <div class="store-full-note">Purchases support server development</div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER: off-white → dark (opposite angle) -->
+<div class="sect-divider" style="background:#f5f5f5">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" style="display:block;width:100%;height:80px">
+    <polygon fill="#131316" points="0,0 1440,60 1440,80 0,80"/>
+  </svg>
+</div>
+
+<!-- DISCORD -->
+<section id="discord" class="section section-dark">
+  <div class="container">
+    <div class="discord-layout">
+      <div class="reveal-left">
+        <div class="section-label section-label-light">Community</div>
+        <h2 class="section-title">Join Our <em>Discord</em></h2>
+        <p class="section-desc section-desc-white">Hang out, get updates, and <strong style="color:#fff">claim FREE in-game rewards</strong> just by joining.</p>
+        <ul class="discord-perks">
+          <li><svg class="perk-svg"><use href="#i-gift"/></svg><div class="perk-body"><strong>Free Stuff on Join</strong><span>Get free in-game items the moment you join</span></div></li>
+          <li><svg class="perk-svg"><use href="#i-bell"/></svg><div class="perk-body"><strong>First to Know</strong><span>Updates, events, and new content announced here first</span></div></li>
+          <li><svg class="perk-svg"><use href="#i-trophy"/></svg><div class="perk-body"><strong>Giveaways</strong><span>Win ranks, Echoes, and rare cosmetics for free</span></div></li>
+          <li><svg class="perk-svg"><use href="#i-users"/></svg><div class="perk-body"><strong>Active Community</strong><span><span id="discordMemberCount" style="color:#fff;font-weight:700">—</span> members and growing every day</span></div></li>
+        </ul>
+        <a href="https://discord.gg/88jvF92RJ7" target="_blank" class="btn btn-discord btn-lg" style="margin-top:8px">
+          <svg class="btn-svg" style="fill:#fff;stroke:none"><use href="#i-discord"/></svg>Join Discord — It's Free!
+        </a>
+      </div>
+      <div class="reveal-right">
+        <div class="dc-widget">
+          <div class="dc-widget-header">
+            <div class="dc-avatar"><svg style="width:28px;height:28px;fill:#fff"><use href="#i-discord"/></svg></div>
+            <div><div class="dc-name">EchoBox</div><div class="dc-online"><span class="dc-online-dot"></span><span id="discordOnline">—</span> online</div></div>
+          </div>
+          <div class="dc-widget-body">
+            <div class="dc-count" id="discordWidgetCount">—</div>
+            <div class="dc-count-label">Total Members</div>
+            <div class="dc-channels">
+              <div class="dc-channel"># announcements</div>
+              <div class="dc-channel"># general</div>
+              <div class="dc-channel"># free-rewards</div>
+              <div class="dc-channel"># events</div>
+            </div>
+          </div>
+          <div class="dc-widget-footer"><a href="https://discord.gg/88jvF92RJ7" target="_blank" class="dc-join-btn">Join Server</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="images/logo.webp" alt="EchoBox" class="footer-brand-logo"/>
+        <p class="footer-brand-desc">The ultimate BoxPvP experience on Minecraft Java &amp; Bedrock Edition.</p>
+        <div class="footer-socials">
+          <a href="https://discord.gg/88jvF92RJ7" target="_blank" class="social-btn" aria-label="Discord">
+            <svg style="width:17px;height:17px;fill:rgba(255,255,255,0.6)"><use href="#i-discord"/></svg>
+          </a>
+        </div>
+      </div>
+      <div><div class="footer-col-title">Play</div><div class="footer-col"><a href="#hero">Home</a><a href="#features">Features</a><a href="#worlds">Worlds</a></div></div>
+      <div><div class="footer-col-title">Community</div><div class="footer-col"><a href="https://discord.gg/88jvF92RJ7" target="_blank">Discord</a><a href="https://echoboxxx.tebex.io" target="_blank">Store</a></div></div>
+      <div>
+        <div class="footer-col-title">Server</div>
+        <div class="footer-ip-display">echoboxxx.minehut.gg</div>
+        <div class="footer-ip-display" style="margin-top:6px;font-size:.78rem">echoboxxx.bedrock.minehut.gg</div>
+        <div class="footer-badge-small" style="margin-top:8px">Minehut Hosted</div>
+      </div>
+    </div>
+    <div class="footer-bottom"><p class="footer-copy">© 2025 EchoBox. Not affiliated with Mojang. Minecraft is a trademark of Mojang AB.</p></div>
+  </div>
+</footer>
+
+<div class="copy-toast" id="copyToast">Copied to clipboard!</div>
+<script src="script.js"></script>
+</body>
+</html>
